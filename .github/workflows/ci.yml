@@ -1,10 +1,14 @@
+permissions:
+  pull-requests: write
+  checks: write
+
 on:
   pull_request:
   push:
     branches: [master]
     
 jobs:
-  unit_tests:
+  integration_tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -15,8 +19,12 @@ jobs:
           node-version-file: .nvmrc
       - name: Install npm dependencies
         run: npm ci
-      - name: Run unit tests
-        run: npm test
+      - name: Run integration tests
+        run: npx allure run -- npm run test
+      - name: Report test results with allure 
+        uses: allure-framework/allure-action@v0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
   
   lint:
     runs-on: ubuntu-latest
