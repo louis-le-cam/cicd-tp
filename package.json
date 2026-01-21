@@ -13,6 +13,7 @@
     "supertest": "^6.3.0"
   },
   "devDependencies": {
+    "allure": "^3.0.1",
     "allure-jest": "^3.4.5",
     "eslint": "^8.0.0",
     "jest": "^30.2.0",
